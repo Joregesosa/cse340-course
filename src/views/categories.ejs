@@ -3,10 +3,10 @@
   <h1><%= title %></h1>
     <h2>Explore Service Opportunities by Category</h2>
     <ul>
-        <li>Environmental</li>
-        <li>Educational</li>
-        <li>Community Service</li>
-        <li>Health and Wellness</li>
+        <% categories.forEach(cat => {%>
+              <li><%= cat.name %></li>    
+        <% }); %> 
+        
     </ul>
 </main>
 <%- include('partials/footer') %>

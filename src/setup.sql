@@ -44,3 +44,50 @@ VALUES
 (3, 'Senior Center Volunteer Day', 'Spend a day volunteering at the local senior center, assisting with activities and events.', '357 Poplar St, Hometown', '2024-09-20'),
 (3, 'Community Health Fair', 'Participate in organizing a health fair to provide free screenings and health education.', '468 Fir St, Hometown', '2024-10-30'),
 (3, 'Neighborhood Safety Workshop', 'Help conduct workshops on neighborhood safety and emergency preparedness.', '579 Hemlock St, Hometown', '2024-11-15');
+
+
+-- Category Table and data for categorizing projects
+
+CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+INSERT INTO category (name) VALUES
+('Environmental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness');
+
+CREATE TABLE project_category (
+    project_id INT REFERENCES project(project_id),
+    category_id INT REFERENCES category(category_id),
+    PRIMARY KEY (project_id, category_id)
+);
+ 
+INSERT INTO project_category (project_id, category_id) VALUES
+(1, 1), 
+(1, 3), 
+(2, 1), 
+(2, 3), 
+(3, 3), 
+(4, 1), 
+(4, 2), 
+(5, 2), 
+(5, 3), 
+(6, 1), 
+(6, 2), 
+(7, 1), 
+(7, 3), 
+(8, 2), 
+(8, 4), 
+(9, 3), 
+(10, 2),
+(11, 3),
+(12, 3),
+(13, 3),
+(13, 4),
+(14, 2),
+(14, 4),
+(15, 2),
+(15, 4);
