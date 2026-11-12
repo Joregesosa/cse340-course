@@ -3,13 +3,11 @@
   <h1><%= title %></h1>
   <h2>Upcoming Service Projects</h2>
   <ul>
-    <% 
-      projects.forEach(pr => { %>
+    <% projects.forEach(pr => { %>
         <li>
            <%= pr.title %> - <%= pr.description%>
         </li>
-      <% })  
-    %>  
+    <% })%>  
   </ul>
 </main>
 <%- include('partials/footer') %>
