@@ -2,7 +2,7 @@ import express from "express";
 
 import { homePage } from "./controllers/index.js";
 import { organizationsPage, showOrganizationDetailsPage } from "./controllers/organizations.js";
-import { projectsPage } from "./controllers/projects.js";
+import { projectDetailsPage, projectsPage } from "./controllers/projects.js";
 import { categoriesPage } from "./controllers/categories.js";
 import { testErrorPage } from "./controllers/errors.js";
 
@@ -13,6 +13,8 @@ router.get("/organizations", organizationsPage);
 router.get("/organization/:id", showOrganizationDetailsPage);
 
 router.get("/projects", projectsPage);
+router.get("/project/:id", projectDetailsPage);
+
 router.get("/categories", categoriesPage);
 
 // error-handling routes

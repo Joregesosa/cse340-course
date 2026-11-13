@@ -5,7 +5,11 @@
   <ul>
     <% projects.forEach(pr => { %>
         <li>
-           <%= pr.title %> - <%= pr.description%>
+          <strong>Project:</strong>
+          <a href="/project/<%= pr.project_id %>"><%= pr.title %></a> 
+          <br>
+          <strong>Partner Organization:</strong>
+          <a href="/organization/<%= pr.organization_id %>"><%= pr.name %></a>
         </li>
     <% })%>  
   </ul>
