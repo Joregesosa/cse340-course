@@ -9,5 +9,12 @@
         <strong>Partner Organization:</strong>
         <a href="/organization/<%= project.organization_id %>"><%= project.name %></a>
     </p>
+
+    <h2>Tags:</h2>
+        <ul>
+        <% categories.forEach(cat => { %>
+            <li><a href="/category/<%= cat.category_id %>"><%= cat.name %></a></li>
+        <% }) %>
+    </ul>
 </main>
 <%- include('partials/footer') %>
