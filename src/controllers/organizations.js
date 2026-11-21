@@ -2,6 +2,7 @@ import {
   createOrganization,
   getAllOrganizations,
   getOrganizationDetails,
+  updateOrganization,
 } from "../models/organizations.js";
 import { getProjectsByOrganizationId } from "../models/projects.js";
 import { body, validationResult } from "express-validator";
@@ -106,6 +107,55 @@ export const processNewOrganizationForm = async (req, res) => {
     logoFilename,
   );
   req.flash("success", "Organization added successfully!");
+
+  res.redirect(`/organization/${organizationId}`);
+};
+
+/**
+ * Controller function to handle the request for the edit organization form.
+ * Fetches the details of a specific organization from the database.
+ * Renders the edit organization form view with the fetched data.
+ * @param {Object} req - The Express request object.
+ * @param {Object} res - The Express response object.
+ */
+export const showEditOrganizationForm = async (req, res) => {
+  const organizationId = req.params.id;
+  const organizationDetails = await getOrganizationDetails(organizationId); 
+  const title = "Edit Organization";
+  res.render("edit-organization", { title, organizationDetails });
+};
+
+/**
+ * Controller function to process the edit organization form.
+ * Updates the details of a specific organization in the database.
+ * @param {Object} req - The Express request object.
+ * @param {Object} res - The Express response object.
+ */
+export const processEditOrganizationForm = async (req, res) => {
+  // Check for validation errors
+  const results = validationResult(req);
+  if (!results.isEmpty()) {
+    // Validation failed - loop through errors
+    results.array().forEach((error) => {
+      req.flash("error", error.msg);
+    });
+
+    // Redirect back to the edit organization form
+    return res.redirect("/edit-organization/" + req.params.id);
+  }
+  const organizationId = req.params.id;
+  const { name, description, contactEmail, logoFilename } = req.body;
+
+  await updateOrganization(
+    organizationId,
+    name,
+    description,
+    contactEmail,
+    logoFilename,
+  );
+
+  // Set a success flash message
+  req.flash("success", "Organization updated successfully!");
 
   res.redirect(`/organization/${organizationId}`);
 };
