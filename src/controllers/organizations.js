@@ -70,5 +70,7 @@ export const processNewOrganizationForm = async (req, res) => {
     contactEmail,
     logoFilename,
   );
+  req.flash("success", "Organization added successfully!");
+
   res.redirect(`/organization/${organizationId}`);
 };
