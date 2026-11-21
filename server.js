@@ -18,6 +18,9 @@ const app = express();
 /**
  * Configure Express middleware
  */
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, "public")));
