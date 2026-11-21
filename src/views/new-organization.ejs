@@ -1,3 +1,9 @@
+<!-- 
+For the organization name input, add required and maxlength="150" attributes.
+For the description textarea, add required and maxlength="500" attributes.
+For the contact email input, change the type from "text" to type="email" and add a required attribute. 
+-->
+
 <%- include('partials/header') %>
 <main>
   <h1><%= title %></h1>
@@ -12,6 +18,7 @@
         name="name"
         placeholder="e.g. Green Earth Alliance"
         required
+        maxlength="150"
       />
     </div>
 
@@ -22,6 +29,7 @@
         name="description"
         placeholder="What does this organization do?"
         required
+        maxlength="500"
       ></textarea>
     </div>
 
@@ -33,6 +41,7 @@
         name="contactEmail"
         placeholder="contact@example.org"
         required
+        maxlength="255"
       />
     </div>
 
