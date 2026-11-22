@@ -290,6 +290,55 @@ main ul li strong {
   box-shadow: 0 0 0 3px rgba(13, 115, 119, 0.25);
 }
 
+/* Checkbox options (e.g. assign categories) */
+.checkbox-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.checkbox-option input {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex-shrink: 0;
+  margin: 0;
+  accent-color: var(--color-accent);
+  cursor: pointer;
+}
+
+.checkbox-option:hover {
+  border-color: var(--color-accent);
+}
+
+.checkbox-option:has(input:checked) {
+  background-color: rgba(13, 115, 119, 0.08);
+  border-color: var(--color-accent);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.checkbox-option:has(input:focus-visible) {
+  box-shadow: 0 0 0 3px rgba(13, 115, 119, 0.25);
+}
+
 .form-hint {
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
@@ -332,6 +381,17 @@ main ul li strong {
   background-color: var(--color-accent-hover);
   color: #ffffff;
   box-shadow: var(--shadow-md);
+}
+
+/* Action links under a page's content (add / edit) */
+.page-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
 }
 
 .btn-secondary {

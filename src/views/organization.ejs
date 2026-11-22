@@ -13,6 +13,8 @@
             <li><a href="/project/<%= project.project_id %>"><%= project.title %></a></li>
         <% }) %>
     </ul>
-    <p><a href="/edit-organization/<%= organizationDetails.organization_id %>">Edit Organization</a></p>
+    <div class="page-actions">
+        <a href="/edit-organization/<%= organizationDetails.organization_id %>" class="btn btn-secondary">Edit Organization</a>
+    </div>
 </main>
 <%- include('partials/footer') %>
