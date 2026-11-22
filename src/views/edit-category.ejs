@@ -1,0 +1,29 @@
+<%- include('partials/header') %>
+<main>
+  <h1>Edit Category</h1>
+  <p>Update the name of this category.</p>
+
+  <form action="/edit-category/<%= category.category_id %>" method="post" class="form-card">
+    <div class="form-group">
+      <label for="name">Category Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="e.g. Environment"
+        minlength="3"
+        maxlength="100"
+        pattern="[A-Za-z0-9 ]+"
+        title="Letters, numbers, and spaces only (3-100 characters)"
+        value="<%= category.name %>"
+        required
+      />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Update Category</button>
+      <a href="/categories" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+</main>
+<%- include('partials/footer') %>

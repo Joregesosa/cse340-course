@@ -117,10 +117,16 @@ export const processNewOrganizationForm = async (req, res) => {
  * Renders the edit organization form view with the fetched data.
  * @param {Object} req - The Express request object.
  * @param {Object} res - The Express response object.
+ * @param {Function} next - The next middleware function in the Express stack.
  */
-export const showEditOrganizationForm = async (req, res) => {
+export const showEditOrganizationForm = async (req, res, next) => {
   const organizationId = req.params.id;
-  const organizationDetails = await getOrganizationDetails(organizationId); 
+  const organizationDetails = await getOrganizationDetails(organizationId);
+  if (!organizationDetails) {
+    const err = new Error("Organization not found");
+    err.status = 404;
+    return next(err);
+  }
   const title = "Edit Organization";
   res.render("edit-organization", { title, organizationDetails });
 };

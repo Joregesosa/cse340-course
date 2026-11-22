@@ -129,7 +129,7 @@ export const processNewProjectForm = async (req, res) => {
  * @param {Object} res - The Express response object.
  * @param {Function} next - The next middleware function in the Express stack.
  */
-export const showEditProjectForm = async (req, res) => {
+export const showEditProjectForm = async (req, res, next) => {
   const projectId = req.params.id;
   const project = await getProjectDetails(projectId);
   const organizations = await getAllOrganizations();
