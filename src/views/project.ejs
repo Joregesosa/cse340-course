@@ -16,9 +16,9 @@
             <li><a href="/category/<%= cat.category_id %>"><%= cat.name %></a></li>
         <% }) %>
     </ul>
-    <div class="page-actions">
+    <div class="page-actions"> 
+        <a href="/edit-project/<%= project.project_id %>" class="btn btn-primary">Edit Project</a>
         <a href="/assign-categories/<%= project.project_id %>" class="btn btn-secondary">Edit Categories</a>
-        <a href="/new-project" class="btn btn-primary">+ Add a New Service Project</a>
     </div>
 </main>
 <%- include('partials/footer') %>

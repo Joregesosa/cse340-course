@@ -5,6 +5,7 @@ import {
   createProject,
   getProjectDetails,
   getUpcomingProjects,
+  updateProject,
 } from "../models/projects.js";
 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
@@ -38,6 +39,7 @@ export const projectValidation = [
     .isInt()
     .withMessage("Organization must be a valid integer"),
 ];
+
 /**
  * Controller function to handle the projects page request.
  * Fetches all projects from the database and renders the projects view.
@@ -117,5 +119,58 @@ export const processNewProjectForm = async (req, res) => {
     console.error("Error creating new project:", error);
     req.flash("error", "There was an error creating the service project.");
     res.redirect("/new-project");
+  }
+};
+
+/**
+ * Controller function to display the Edit Service Project form.
+ * Fetches the project details and all organizations from the database and renders the edit project form view.
+ * @param {Object} req - The Express request object.
+ * @param {Object} res - The Express response object.
+ * @param {Function} next - The next middleware function in the Express stack.
+ */
+export const showEditProjectForm = async (req, res) => {
+  const projectId = req.params.id;
+  const project = await getProjectDetails(projectId);
+  const organizations = await getAllOrganizations();
+
+  if (!project) {
+    const err = new Error("Project not found");
+    err.status = 404;
+    return next(err);
+  }
+
+  const title = "Edit Service Project";
+  res.render("edit-project", { title, project, organizations });
+};
+
+export const processEditProjectForm = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    errors.array().forEach((error) => {
+      req.flash("error", error.msg);
+    });
+    return res.redirect(`/edit-project/${req.params.id}`);
+  }
+
+  const { title, description, location, date, organizationId } = req.body;
+  const projectId = req.params.id;
+
+  try {
+    const updatedProjectId = await updateProject(
+      projectId,
+      title,
+      description,
+      location,
+      date,
+      organizationId,
+    );
+
+    req.flash("success", "Service project updated successfully!");
+    res.redirect(`/project/${updatedProjectId}`);
+  } catch (error) {
+    console.error("Error updating project:", error);
+    req.flash("error", "There was an error updating the service project.");
+    res.redirect(`/edit-project/${req.params.id}`);
   }
 };
